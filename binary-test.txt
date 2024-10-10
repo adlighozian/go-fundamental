@@ -1,0 +1,49 @@
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	res := binary(100, 200, 300, 400, 500, 600, 700)
+
+	fmt.Println(res)
+}
+
+func binary(data ...int) string {
+
+	var totalNol, totalAngka int
+
+	for _, v := range data {
+
+		binar := strconv.FormatInt(int64(v), 2)
+		fmt.Printf("nomor: %d, binar: %s\n", v, binar)
+
+		var nol, panjangNol = 0, 0
+
+		for _, vs := range binar {
+			if vs == '0' {
+				nol++
+			} else {
+				if nol > panjangNol {
+					panjangNol = nol
+				}
+				nol = 0
+			}
+		}
+
+		if nol > panjangNol {
+			panjangNol = nol
+		}
+
+		if panjangNol > totalNol {
+			totalNol = panjangNol
+			totalAngka = v
+		}
+	}
+
+	jawaban := fmt.Sprintf("output: %d -> %d", totalAngka, totalNol)
+
+	return jawaban
+}
